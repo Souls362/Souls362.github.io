@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-    <audio autoplay>
-            <source src="./images/TheRose.mp3">
-    </audio>
+    <!-- <audio id="player" autoplay loop>
+            <source src="./images/TheRose.mp3" type="audio/mp3">
+    </audio> -->
+    <audio src="./images/TheRose.mp3" muted autoplay loop id="myaudio" style="display: none"></audio>
     <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title></title>
         <link type="text/css" rel="stylesheet" href="./index_files/default.css">
@@ -32,7 +33,7 @@
 			        	<span class="say"></span><br> -->
 					    <span class="say"></span><br>
                         <span class="say" style="color:hotpink;"><strong>张医生</strong>你好呀!</span><br>
-					    <span class="say" style="color:hotpink;">不知道你<strong>愿意</strong>和我交往吗？结婚的那种哟</span><br>
+					    <span class="say" style="color:hotpink;">不知道你<strong>愿意</strong>和我交往吗？结婚的那种</span><br>
                         <img src="./images/rose.png" style="object-fit:cover;width:150px; height:auto"/>
 <!-- 			        <span class="say"></span><br>
 					    <span class="say"></span><br>
@@ -48,7 +49,9 @@
 					    <span class="say"></span><br>
 					    <span class="say"></span><br> -->
 					    <span class="say"></span><br>
-                        <span class="say" style="color:hotpink;"><span class="space"></span><i>--Frank--</i></span>
+                        <span class="say"></span><br>
+                        <span class="say" style="color:hotpink;"><span class="space"></span><i>    --Frank--</i></span>
+                        <span class="say"></span><br>
 			        </div>
                 </div>
                 <div id="clock-box">
@@ -60,6 +63,34 @@
         </div>
     
     <script>
+    </script>
+
+    <script>
+    /*
+    * muted 静音
+    * autoplay 自动播放
+    * loop 循环播放
+    */
+    var audio = document.getElementById('myaudio');
+    var t1 = 1800;//如果是轮询，这个时间必须大于音频的长度。如果是webscoket，应该设置一个状态play，避免重复播放，如下：
+    var t2 = 180000;//音频的长度，确保能够完整的播放给用户
+    var play = false;
+    function run(){
+        if(play){
+            return false;
+        }
+        audio.currentTime = 0;//设置播放的音频的起始时间
+        audio.volume = 0.5;//设置音频的声音大小
+        audio.muted = false;//关闭静音状态
+        play = true;
+        setTimeout(function(){
+            play = false;
+            audio.muted = true;//播放完毕，开启静音状态
+        },t2);
+    }
+    setInterval(function(){
+        run();//假装在轮询服务器，或者从websocket拉取数据
+    },t1);
     </script>
 
     <script>
