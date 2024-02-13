@@ -72,8 +72,8 @@
     * loop 循环播放
     */
     var audio = document.getElementById('myaudio');
-    var t1 = 1800;//如果是轮询，这个时间必须大于音频的长度。如果是webscoket，应该设置一个状态play，避免重复播放，如下：
-    var t2 = 180000;//音频的长度，确保能够完整的播放给用户
+    var t1 = 10000;//如果是轮询，这个时间必须大于音频的长度。如果是webscoket，应该设置一个状态play，避免重复播放，如下：
+    var t2 = 100000;//音频的长度，确保能够完整的播放给用户
     var play = false;
     function run(){
         if(play){
